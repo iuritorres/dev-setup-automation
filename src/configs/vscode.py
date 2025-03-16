@@ -1,5 +1,6 @@
 """This module contains functions to setup vscode settings and keybindings"""
 
+from os import system
 from pathlib import Path
 
 from github.gist import get_gist
@@ -30,3 +31,42 @@ def setup_keybindings():
     keybindings = keybindings_gist.files["keybindings.json"].content
 
     config_path.joinpath("keybindings.json").write_text(keybindings, "utf8")
+
+
+def install_extensions():
+    """Install vscode extensions"""
+
+    print("Installing vscode extensions...")
+
+    extensions = [
+        # Python Development
+        "ms-python.python",
+        "ms-python.pylint",
+        "ms-python.isort",
+        "ms-python.black-formatter",
+        "ms-python.vscode-pylance",
+        # Linters and Formatters
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+        # Productivity
+        "Cardinal90.multi-cursor-case-preserve",
+        "yzhang.markdown-all-in-one",
+        "YoavBls.pretty-ts-errors",
+        "Prisma.prisma",
+        "redhat.vscode-yaml",
+        "bradlc.vscode-tailwindcss",
+        # Themes and Icons
+        "dracula-theme.theme-dracula",
+        "PKief.material-icon-theme",
+        "naumovs.color-highlight",
+        # Git Integration
+        "eamodio.gitlens",
+        # GitHub Integration
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+    ]
+
+    for extension in extensions:
+        system(f"code --install-extension {extension}")
